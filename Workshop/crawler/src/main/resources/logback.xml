@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Appenders -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="fileGeneral" class="ch.qos.logback.core.FileAppender">
+        <file>logs/crawler.log</file>
+
+        <encoder>
+            <!--<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>-->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="fileActors" class="ch.qos.logback.core.FileAppender">
+        <file>logs/crawlerActors.log</file>
+
+        <encoder>
+            <!--<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>-->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Loggers -->
+    <logger name="com.endava.actormodel.akka.base.actors" additivity="false">
+        <appender-ref ref="console"/>
+        <appender-ref ref="fileActors"/>
+    </logger>
+
+    <logger name="org.apache.http" level="error"/>
+    <logger name="httpclient.wire" level="error"/>
+
+    <!-- Root -->
+    <root level="info">
+        <appender-ref ref="console"/>
+        <appender-ref ref="fileGeneral"/>
+        <appender-ref ref="fileActors"/>
+    </root>
+</configuration>
